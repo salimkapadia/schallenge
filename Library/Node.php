@@ -73,14 +73,3 @@ class Library_Node{
         return $this->dName;
     }
 }
-
-//test
-$directories = array("/home/sports/basketball/ncaa/", "/home/music/rap/gangster");
-$root = new Library_Node("root","root");
-
-foreach ($directories as $directory){
-    $paths = explode(DIRECTORY_SEPARATOR, $directory);
-    $root->addDirectoryElement($paths, $root->getCurrentDirectoryPath());
-}
-
-//print them ...
