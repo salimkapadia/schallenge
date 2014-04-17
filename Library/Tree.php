@@ -2,6 +2,7 @@
 /**
  * @author Salim Kapadia
  */
+require_once('Node.php');
 
 class Library_Tree{
     public $root; /* @var <Library_Node> */
