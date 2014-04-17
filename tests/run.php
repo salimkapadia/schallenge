@@ -14,8 +14,8 @@ $directories = array(
 $tree = new Library_Tree(new Library_Node("root","root"));
 
 foreach ($directories as $directory){
-    echo $directory . "\n";
+    echo $directory
     $tree->add($directory);
 }
 
-//print them ...
+$tree->showTree();

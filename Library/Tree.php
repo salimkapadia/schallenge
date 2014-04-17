@@ -28,4 +28,8 @@ class Library_Tree{
         $this->root->addDirectoryElement($paths, $this->root->getCurrentDirectoryPath());
     }
 
+    public function showTree(){
+        $this->root->showNodeDetails();
+    }
+
 }

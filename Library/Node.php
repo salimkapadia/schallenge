@@ -76,4 +76,19 @@ class Library_Node{
     public function __toString(){
         return $this->dName;
     }
+
+    public function showPreOrderTraversal(){
+        //@TODO: Please implement.
+        echo "Pending ...";
+    }
+
+    public function showNodeDetails(){
+        echo $this->getCurrentDirectoryPath() . "\n";
+        foreach ($this->collectionOfChildNodes as $childNode){
+            $childNode->showNodeDetails();
+        }
+        foreach ($this->collectionOfLeafNodes as $leafdNode){
+            $leafdNode->showNodeDetails();
+        }
+    }
 }
