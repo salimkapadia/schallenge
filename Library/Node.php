@@ -18,7 +18,9 @@ class Library_Node{
         $this->dName = $directoryName;
         $this->currentDPath = $dPath;
     }
-
+    public function getDName(){
+        return $this->dName;
+    }
     /**
      * @description - This is the physical path represenation of the node on the filesystem.
      * @return string
@@ -47,13 +49,15 @@ class Library_Node{
         //determine if its a leaf
         if (count($path) == 1){
             array_push($this->collectionOfLeafNodes,$addChildNode);
+            return true;
         }else{
-
             //not a leaf node so must be a child node.
             //search through all the child nodes until you find the node where this child node belongs
             $indexPosition = -1;
-            for($i=0; $i<count($this->collectionOfChildNodes); $i++){
-                if($this->collectionOfChildNodes[$i]->getCurrentDirectoryPath() == $addChildNode->getCurrentDirectoryPath()){
+            for($i=0; $i< count($this->collectionOfChildNodes); $i++){
+                if($this->collectionOfChildNodes[$i]->getCurrentDirectoryPath() == $addChildNode->getCurrentDirectoryPath() &&
+                    $this->collectionOfChildNodes[$i]->getDName() == $addChildNode->getDName()
+                ){
                     $indexPosition = $i; // We found the child node of where the new child node needs to be added.
                     break;
                 }
@@ -62,10 +66,10 @@ class Library_Node{
                 array_push($this->collectionOfChildNodes,$addChildNode);
 
                 //now add any additional directories below this as either child nodes or leaf nodes.
-                $addChildNode->addDirectoryElement($path,$addChildNode->getCurrentDirectoryPath());
+                $addChildNode->addDirectoryElement(array(array_shift($path)),$addChildNode->getCurrentDirectoryPath());
             }else{
                 //we located its parent directory so we need to add it to that.
-                $this->collectionOfChildNodes[$indexPosition]->addDirectoryElement($path,$addChildNode->getCurrentDirectoryPath());
+                $this->collectionOfChildNodes[$indexPosition]->addDirectoryElement(array(array_shift($path)),$addChildNode->getCurrentDirectoryPath());
             }
         }
     }
