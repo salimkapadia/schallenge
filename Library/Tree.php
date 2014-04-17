@@ -19,20 +19,13 @@ class Library_Tree{
      * @param $path <string> - The directory path to be added
      */
     public function add($path){
+        //remove trailing and leading directory separator
+        $path = rtrim($path,DIRECTORY_SEPARATOR);
+        $path = ltrim($path,DIRECTORY_SEPARATOR);
+
         $paths = explode(DIRECTORY_SEPARATOR, $path);
 
         $this->root->addDirectoryElement($paths, $this->root->getCurrentDirectoryPath());
     }
 
 }
-
-//test
-$directories = array("/home/sports/basketball/ncaa/", "/home/music/rap/gangster");
-
-$tree = new Library_Tree(new Library_Node("root","root"));
-
-foreach ($directories as $directory){
-    $tree->add($directory);
-}
-
-//print them ...
