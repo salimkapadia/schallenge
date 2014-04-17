@@ -32,6 +32,7 @@ class Library_Node{
      * @param $currentDirectoryName - Where is this being added too ?
      */
     public function addDirectoryElement(array $path, $currentDirectoryName){
+
         //since most paths start with the directory separator, the first element could be empty.
         if( $path[0] == ""){
             array_shift($path); //remove the first element from the collection.
@@ -47,6 +48,7 @@ class Library_Node{
         if (count($path) == 1){
             array_push($this->collectionOfLeafNodes,$addChildNode);
         }else{
+
             //not a leaf node so must be a child node.
             //search through all the child nodes until you find the node where this child node belongs
             $indexPosition = -1;
@@ -67,4 +69,18 @@ class Library_Node{
             }
         }
     }
+    public function __toString(){
+        return $this->dName;
+    }
 }
+
+//test
+$directories = array("/home/sports/basketball/ncaa/", "/home/music/rap/gangster");
+$root = new Library_Node("root","root");
+
+foreach ($directories as $directory){
+    $paths = explode(DIRECTORY_SEPARATOR, $directory);
+    $root->addDirectoryElement($paths, $root->getCurrentDirectoryPath());
+}
+
+//print them ...
